@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'shalmy_player.wsgi.application'
+WSGI_APPLICATION = 'shalmy_player.wsgi.app'
 
 
 # Database
