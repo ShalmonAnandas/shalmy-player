@@ -3,28 +3,27 @@
 {% block title %}Search Results{% endblock title %}
 
 {% block body %}
-{% if data %}
-<h1 class="display-6 p-6"> Search Results</h1>
-<div class="row">
-    {% for title, description, poster, id in data %}
-        <div class="col">
-            <div class="card" style="width: 18rem;">
-                <div class="overflow-hidden" style="height:27rem;">
-                    <img src="https://image.tmdb.org/t/p/original{{ poster }}" class="card-img-top" alt="poster_{{title}}">
-                </div>
-                <div class="card-body">
-                    <h5 class="text-truncate">{{ title }}</h5>
-                    <div class="overflow-hidden">
-                        <p class="text-truncate">{{ description }}</p>
+    {% if data %}
+        <h1 class="display-6 py-5 px-3"> Search Results</h1>
+        <div class="container-fluid text-center" align="center">
+            <div class="row">
+                {% for title, description, poster, id in data %}
+                    <div class="col">
+                        <div class="card mb-4" style="width:18rem; height:36rem" >
+                            <div class="card-img-top">
+                                <img src="https://image.tmdb.org/t/p/w500/{{ poster }}" class="card-img-top" alt="poster_{{title}}">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="text-truncate">{{ title }}</h5>
+                                <p class="text-truncate">{{ description }}</p>
+                                <a href="https://v2.vidsrc.me/embed/{{ id }}/" class="btn btn-primary align-center">Watch Now</a>
+                            </div>
+                        </div>
                     </div>
-                    <a href="https://v2.vidsrc.me/embed/{{ id }}/" class="btn btn-primary px-4">Watch Now</a>
-                </div>
+                {% endfor %}
             </div>
-            <br>
         </div>
-    {% endfor %}
-</div>
-{% else %}
-    <p>Search for a Movie / TV Show</p>
-{% endif %}
+    {% else %}
+        <p>Search for a Movie / TV Show</p>
+    {% endif %}
 {% endblock body %}
