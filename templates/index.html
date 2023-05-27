@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block body %}
+<div class="position-relative">
+    <div class="position-absolute top-50 start-50 translate-middle-x">
+        <h1 class="display-1"> Search for a Movie</h1>
+        <form class="d-flex" role="search" action="{% url 'search' %}" method="GET">
+            <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+{% endblock body %}
