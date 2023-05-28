@@ -3,11 +3,12 @@
 {% block title %}Search Results{% endblock title %}
 
 {% block body %}
-    {% if data %}
+    {% if movie_data %}
         <h1 class="display-6 py-5 px-3"> Search Results</h1>
+        <h1 class="display-6 px-3"> Movies </h1>
         <div class="container-fluid text-center" align="center">
             <div class="row">
-                {% for title, description, poster, id in data %}
+                {% for title, description, poster, id in movie_data %}
                     <div class="col">
                         <div class="card mb-4" style="width:18rem; height:36rem" >
                             <div class="card-img-top">
@@ -16,7 +17,34 @@
                             <div class="card-body">
                                 <h5 class="text-truncate">{{ title }}</h5>
                                 <p class="text-truncate">{{ description }}</p>
-                                <a href="https://v2.vidsrc.me/embed/{{ id }}/" class="btn btn-primary align-center">Watch Now</a>
+                                <a href="https://www.2embed.to/embed/tmdb/movie?id={{ id }}/" class="btn btn-primary align-center">Watch Now</a>
+                                
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <p>Search for a Movie / TV Show</p>
+    {% endif %}
+    {% if tv_data %}
+        <h1 class="display-6 px-3"> TV Shows </h1>
+        <div class="container-fluid text-center" align="center">
+            <div class="row">
+                {% for title, description, poster, id in tv_data %}
+                    <div class="col">
+                        <div class="card mb-4" style="width:18rem; height:36rem" >
+                            <div class="card-img-top">
+                                <img src="https://image.tmdb.org/t/p/w500/{{ poster }}" class="card-img-top" alt="poster_{{title}}">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="text-truncate">{{ title }}</h5>
+                                <p class="text-truncate">{{ description }}</p>
+                                {% comment %} <a href="https://www.2embed.to/embed/tmdb/tv?id={{ id }}&s=1&e=1" class="btn btn-primary align-center">Watch Now</a> {% endcomment %}
+                                <form class="container" role="tv_episode_select" action="{% url 'tv_episode_select' %}" method="get">
+                                    <a href="tv_episode_select" class="btn btn-primary align-center" name="{{ id }}">Watch Now</a>
+                                </form>
                             </div>
                         </div>
                     </div>

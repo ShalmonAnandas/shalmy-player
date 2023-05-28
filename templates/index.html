@@ -4,10 +4,10 @@
 
 {% block body %}
 <div class="container p-5 text-center">
-        <h1 class="display-1"> Search for a Movie</h1>
+        <h1 class="display-1"> Search </h1>
         <br>
         <form class="d-flex" role="search" action="{% url 'search' %}" method="GET">
-            <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
+            <input class="form-control me-2" type="search" name="q" placeholder="Movie" aria-label="Search">
             <button class="btn btn-outline-success" type="submit">Search</button>
         </form>
 </div>
