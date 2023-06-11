@@ -82,6 +82,49 @@ def tv_shows(request):
 
 
 def tv_episode_select(request):
-    var = request.GET.get["name"]
-    print(var)
+    show_id = request.GET.get("value")
+    url = f"https://api.themoviedb.org/3/tv/{show_id}?language=en-US"
+    headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2Q1NTg1YTU0OTdiMzczNjc5ZThiZGM3ZDZmMGQyMiIsInN1YiI6IjYyMWRlNjY2ZDM4YjU4MDAxYmY0NDM3NSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.JQAtkdBkGc2UNLbGZltTqowTCKCRyoGFL1OkwuWTZz8",
+    }
+    response = requests.get(url, headers=headers)
+    json_data = json.loads(response.text)
+    seasons = json_data["seasons"]
+
+    episode_data_list = []
+
+    for i in range(len(seasons)):
+        url = (
+            "https://api.themoviedb.org/3/tv/"
+            + str(show_id)
+            + "/season/"
+            + str(seasons[i].get("season_number"))
+            + "?language=en-US"
+        )
+        response = requests.get(url, headers=headers)
+
+        episode_data = {}
+
+        temp_json_data = json.loads(response.text)
+        episodes = temp_json_data["episodes"]
+
+        file = open("episode_number_detail.json", "w")
+
+        for i in range(len(episodes)):
+            # with open("episode_number_detail.json", "a") as file:
+            episode_data[episodes[i].get("season_number")] = episodes[i].get("name")
+            episode_data_list.append(episode_data)
+
+        file.write(str(episode_data_list))
+
+        # if episodes[i].get("season_number") == 0:
+        #     file.write(str(episodes[i].get("name")))
+        #     file.write("\n")
+
+        # season_list.append(seasons[i].get("name"))
+        # episodes_list.append(seasons[i].get("episode_count"))
+
+    # print(season_list, episodes_list)
+
     return render(request, "tv_episode_select.html")

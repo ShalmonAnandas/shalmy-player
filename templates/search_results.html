@@ -43,7 +43,8 @@
                                 <p class="text-truncate">{{ description }}</p>
                                 {% comment %} <a href="https://www.2embed.to/embed/tmdb/tv?id={{ id }}&s=1&e=1" class="btn btn-primary align-center">Watch Now</a> {% endcomment %}
                                 <form class="container" role="tv_episode_select" action="{% url 'tv_episode_select' %}" method="get">
-                                    <a href="tv_episode_select" class="btn btn-primary align-center" name="{{ id }}">Watch Now</a>
+                                    <input type="hidden" name="value" value="{{ id }}">
+                                    <input type="submit" class="btn btn-primary align-center" value="Watch Now">
                                 </form>
                             </div>
                         </div>
